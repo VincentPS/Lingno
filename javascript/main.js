@@ -45,9 +45,13 @@ function drawCols(row, identifierCol) {
 }
 
 function setActiveRow(identifier) {
-    let currentRow = document.getElementById("row" + identifier);
-    for (let i = 0; i < 5; i++) {
-        currentRow.childNodes[i].childNodes[0].removeAttribute('disabled');
+    if (identifier < 7) {
+        let currentRow = document.getElementById("row" + identifier);
+        for (let i = 0; i < 5; i++) {
+            currentRow.childNodes[i].childNodes[0].removeAttribute('disabled');
+        }
+    } else {
+        document.getElementById("submitWord").outerHTML = "";
     }
 }
 
@@ -79,8 +83,50 @@ function checkResult() {
     localStorage.setItem('activeRow', newRowValue);
     setActiveRow(localStorage.getItem('activeRow'));
     disablePreviousRow();
+    let previousRow = document.getElementById("row" + (parseInt(localStorage.getItem('activeRow')) - 1));
     for (let i = 0; i < currentWord.length; i++) {
         result.push(filterLetters(currentWord[i], wordArray[i]));
     }
-    console.log(result);
+    result = filter(currentWord, wordArray);
+    for (let j = 0; j < result.length; j++) {
+        if (result[j] === 1) {
+            previousRow.childNodes[j].childNodes[0].style.backgroundColor = "#84ff35";
+        } else if (result[j] === 2) {
+            previousRow.childNodes[j].childNodes[0].style.backgroundColor = "#ffe033";
+        } else {
+            previousRow.childNodes[j].childNodes[0].style.backgroundColor = "#e4453b";
+        }
+    }
+}
+
+function filter(attempt, correct) {
+    let result = [];
+    for (let letter in attempt) {
+        if (!attempt.hasOwnProperty(letter)) {
+            continue;
+        }
+        if (attempt[letter] === correct[letter]) {
+            result[letter] = 1;
+            delete attempt[letter];
+            delete correct[letter];
+        } else {
+            result[letter] = 0;
+        }
+    }
+    for (let key in correct) {
+        if (!correct.hasOwnProperty(key)) {
+            continue;
+        }
+        for (let letter in attempt) {
+            if (!attempt.hasOwnProperty(letter)) {
+                continue;
+            }
+            if (attempt[letter] == correct[key]) {
+                result[key] = 2;
+                delete attempt[letter];
+                delete correct[key];
+            }
+        }
+    }
+    return result;
 }

@@ -1,17 +1,36 @@
+:root {
+    --dark-blue: #2d40b4;
+    --light-blue: #415dff;
+}
+
+.gameWindow {
+    width: 600px;
+    height: 700px;
+
+}
+
 #table {
-    border: 1px solid black;
+    border: 1px solid var(--dark-blue);
     padding: 0;
+    background-color: var(--dark-blue);
 }
 
 #table td {
+    background-color: var(--light-blue);
     width: 50px;
     height: 50px;
     font-size: 60px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid var(--dark-blue);
 }
 
 .letterInput {
+    border: var(--dark-blue);
+    font-variant: all-small-caps;
+    font-family: 'Arvo', serif;
+    font-weight: bold;
+    color: white;
+    background-color: var(--light-blue);
     border: none;
     width: 60px;
     height: 50px;
@@ -20,4 +39,22 @@
     resize: none;
     position: relative;
     top: 7px;
+}
+
+.letterInput:disabled {
+    font-variant: all-small-caps;
+    font-family: 'Arvo', serif;
+    font-weight: bold;
+    color: white;
+    background-color: var(--light-blue);
+}
+
+#submitWord {
+    margin-bottom: 2px;
+    background-color: #ffba37;
+    width: 100px;
+    height: 50px;
+    font-family: 'Arvo', serif;
+    font-weight: bold;
+    font-size: large;
 }

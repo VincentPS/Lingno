@@ -8,6 +8,7 @@
     <script src="javascript/words.js"></script>
     <script src="javascript/main.js"></script>
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <title>Lingo</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
 
         </tbody>
     </table>
-    <input class="submitWord" onclick="checkResult()" type="submit" name="submitWord">
+    <input id="submitWord" class="submitWord" onclick="checkResult()" type="submit" name="submitWord">
 </div>
 </body>
 </html>
